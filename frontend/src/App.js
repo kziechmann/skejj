@@ -33,7 +33,7 @@ function App() {
           <NavigationBar></NavigationBar>
       </header>
       <main>
-      <EthAccountBar></EthAccountBar>
+      <EthAccountBar ></EthAccountBar>
       <Jumbotron fluid>
         <Container>
           <h1>Videos</h1>
