@@ -14,6 +14,7 @@ const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' 
 function App() {
   const [ userAccount, setAccount ] = useState('')
   const [ fileTransferContract, setContract ] = useState(null)
+  const [ searchTerm, setSearchTerm ] = useState('')
   const [ inbox, setInbox ] = useState({})
 
   // Initial application state
@@ -27,13 +28,17 @@ function App() {
     setContract(ipfsInbox)
   }, []);
 
+  const searchIPFS = (searchTerm) => {
+    setSearchTerm(String(searchTerm).trim())
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-          <NavigationBar></NavigationBar>
+          <NavigationBar searchIPFS={searchIPFS}></NavigationBar>
       </header>
       <main>
-      <EthAccountBar ></EthAccountBar>
+      <EthAccountBar userAccount={userAccount}></EthAccountBar>
       <Jumbotron fluid>
         <Container>
           <h1>Videos</h1>

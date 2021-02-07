@@ -1,27 +1,47 @@
 
-import { Form, FormControl} from 'react-bootstrap'
+import { InputGroup, FormControl} from 'react-bootstrap'
+import { useState } from 'react'
 import './NavigationBar.css'
 
-export const NavigationBar = function (){
+export const NavigationBar = function ({ searchIPFS }){
+    const [ searchText, setSearchText ] = useState('')
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        setSearchText('')
+        searchIPFS(searchText)
+    }
+
     return (
-        <nav>
+        <nav className="nav">
             {/* <a href="#" class="logo">
                 <img src="images/logo.png"/>
             </a> */}
             <h1> SKEJJ </h1>
-            <input class="menu-btn" type="checkbox" id="menu-btn"/>
-            <Form className="search_box" inline>
-                <FormControl type="text" placeholder="Search IPFS..." />
-                <button className="search_btn" variant="outline-primary">SEARCH</button>
-            </Form>
-            <label class="menu-icon" for="menu-btn">
-                <span class="nav-icon"></span>
+            <input className="menu-btn" type="checkbox" id="menu-btn"/>
+            <InputGroup className="search_box" inline>
+                <FormControl 
+                    onChange={e => setSearchText(e.target.value)} 
+                    value={searchText} type="text"
+                    className="search_input" 
+                    placeholder="Search IPFS..." />
+                <InputGroup.Append >
+                   <button
+                    onClick={handleSubmit} 
+                    className="search_btn" 
+                    variant="outline-primary">
+                        SEARCH
+                   </button>
+                </InputGroup.Append>
+            </InputGroup>
+            <label className="menu-icon" htmlFor="menu-btn">
+                <span className="nav-icon"></span>
             </label>
-            <ul class="menu">
-                <li><a href="#">Images</a></li>
-                <li><a href="#">Video</a></li>
-                <li><a href="#">Music</a></li>
-                <li><a href="upload.html">UPLOAD</a></li>
+            <ul className="menu">
+                <li><button >Images</button></li>
+                <li><button >Video</button></li>
+                <li><button >Music</button></li>
+                <li><button >UPLOAD</button></li>
             </ul>
         </nav>
   )

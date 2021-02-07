@@ -1,5 +1,15 @@
+.account_details{
+  color: #5273dd;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.account_details .identicon{
+  margin: 0rem .25rem;
+}
+
 .eth_account{
-    color:#5273dd;
     background: white;
     padding: .5rem;
     display: flex;
