@@ -1,5 +1,5 @@
-import FileTransferContract from '../abis/FileTransfer.json'
-import Web3 from  'web3.js'
+// import FileTransferContract from './ABIs/FileTransfer.json'
+import Web3 from  'web3'
 
 export const loadWeb3 = async () => {
     if (window.ethereum) {
@@ -23,15 +23,15 @@ export const getAccount = async () =>{
 }
 
 export const getFileTransferContract = async () => {
-    const web3 = window.web3
-    const networkId = await web3.eth.net.getId()
-    const networkData = FileTransferContract.networks[networkId]
-    if(networkData) {
-      const fileTransferContract = new web3.eth.Contract(FileTransferContract.abi, networkData.address)
-      return fileTransferContract
-    } else {
-      return null
-    }
+    // const web3 = window.web3
+    // const networkId = await web3.eth.net.getId()
+    // const networkData = FileTransferContract.networks[networkId]
+    // if(networkData) {
+    //   const fileTransferContract = new web3.eth.Contract(FileTransferContract.abi, networkData.address)
+    //   return fileTransferContract
+    // } else {
+    //   return null
+    // }
 }
 
 export const getInbox = async (contract) =>{

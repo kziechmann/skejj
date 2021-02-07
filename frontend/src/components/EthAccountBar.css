@@ -1,0 +1,7 @@
+.eth_account{
+    color:#5273dd;
+    background: white;
+    padding: .5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
