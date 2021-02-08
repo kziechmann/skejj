@@ -46,14 +46,14 @@
 
 /* Search Box */
 
-.search_btn {
+/* .search_btn {
   border:#5a76fd 1.5px solid;
   color: white;
   height: 100%;
   padding: .275rem;
   background-color: #5a76fd;
   border-radius: .125rem;
-}
+} */
 
 .search_btn:hover {
   box-shadow: 5px 10px 30px rgba(90, 118, 253, 0.5);

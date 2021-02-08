@@ -3,7 +3,7 @@ import { InputGroup, FormControl} from 'react-bootstrap'
 import { useState } from 'react'
 import './NavigationBar.css'
 
-export const NavigationBar = function ({ searchIPFS }){
+export const NavigationBar = function ({ searchIPFS, toggleUploadModal }){
     const [ searchText, setSearchText ] = useState('')
 
     const handleSubmit = e => {
@@ -41,7 +41,7 @@ export const NavigationBar = function ({ searchIPFS }){
                 <li><button >Images</button></li>
                 <li><button >Video</button></li>
                 <li><button >Music</button></li>
-                <li><button >UPLOAD</button></li>
+                <li><button onClick={toggleUploadModal}>UPLOAD</button></li>
             </ul>
         </nav>
   )
