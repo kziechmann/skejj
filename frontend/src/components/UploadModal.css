@@ -1,0 +1,75 @@
+.modal-footer, .modal-header{
+    background-color: #5a76fd;
+    color: white;
+}
+
+.modal-dialog.upload_modal {
+
+    position: absolute;
+    top: 10vh;
+    left: 33vw;
+    width: 40vw;
+    z-index: 3;
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.modal-body label {
+    display: flex;
+}
+
+.modal-footer button.close_btn {
+    border: white 1.5px solid;
+    color: white;
+    height: 100%;
+    padding: .275rem;
+    background-color: transparent;
+    border-radius: .125rem;
+}
+
+.close_btn:hover{
+    box-shadow: 5px 10px 30px rgba(255, 255, 255, 0.486);
+    transition: all ease 0.2s;
+}
+
+.modal-body input[type=file], .modal-body input[type=text] {
+    border: #5a76fd 1.5px solid;
+    color: #5a76fd;
+    height: 100%;
+    padding: .275rem;
+    background-color: transparent;
+    border-radius: .125rem;
+}
+
+.modal-body .form-check, .input_label{
+    color: #5a76fd;
+}
+
+.input_label{
+    margin-top: 1rem;
+}
+
+.modal-body .file_input{
+    justify-content: space-between;
+}
+
+.file_input_name{
+    padding: 0rem 1rem;
+    margin: auto;
+}
+
+.modal-body input[type=file]{
+    justify-self: baseline;
+}
+
+.close span{
+  color: white;
+}
+
+.close:hover{
+    box-shadow: none;
+}
