@@ -4,18 +4,41 @@
 }
 
 .modal-dialog.upload_modal {
-
     position: absolute;
+    text-align: unset;
     top: 10vh;
     left: 33vw;
+    min-width: 350px;
     width: 40vw;
     z-index: 3;
+}
+
+@media (max-width: 1000px) {
+    .modal-dialog.upload_modal {
+        left: 25%;
+    }
+}
+
+@media (max-width: 750px) {
+    .modal-dialog.upload_modal {
+        left: 15%;
+    }
+}
+
+@media (max-width: 500px) {
+    .modal-dialog.upload_modal {
+        left: 2%;
+    }
 }
 
 .modal-body{
     display: flex;
     flex-direction: column;
     align-items: baseline;
+}
+
+.modal-body form{
+    width: 100%;
 }
 
 .modal-body label {
@@ -36,7 +59,7 @@
     transition: all ease 0.2s;
 }
 
-.modal-body input[type=file], .modal-body input[type=text] {
+.modal-body input[type=text], .modal-body .file_input {
     border: #5a76fd 1.5px solid;
     color: #5a76fd;
     height: 100%;
@@ -45,8 +68,24 @@
     border-radius: .125rem;
 }
 
+.modal-body input[type=text] {
+    width: 100%;
+}
+
 .modal-body .form-check, .input_label{
     color: #5a76fd;
+}
+
+.modal-body ul span.remove_tag{
+    cursor: pointer;
+    padding: .3rem;
+    color: lightgrey;
+}
+
+
+
+.modal-body ul span.remove_tag:hover{
+    color: white;
 }
 
 .input_label{
@@ -58,12 +97,23 @@
 }
 
 .file_input_name{
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding: 0rem 1rem;
     margin: auto;
 }
 
 .modal-body input[type=file]{
     justify-self: baseline;
+}
+
+.select_file{
+  border:#5a76fd 1.5px solid;
+  color: white;
+  height: 100%;
+  padding: .275rem;
+  background-color: #5a76fd;
+  border-radius: .125rem;
 }
 
 .close span{
@@ -73,3 +123,14 @@
 .close:hover{
     box-shadow: none;
 }
+
+.tag_list {
+    justify-content: center;
+    display: flex;
+    padding: 0px;
+    flex-wrap: wrap;
+  }
+  
+  .tag {
+    margin: .1rem;
+  }
