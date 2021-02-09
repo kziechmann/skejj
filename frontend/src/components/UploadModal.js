@@ -5,18 +5,32 @@ import './UploadModal.css'
 
 export const UploadModal = ({ showModal, toggleUploadModal, uploadFileToIPFS }) =>{
     const [ fileName, setfileName ] = useState('')
-    const [ fileType, setFileType ] = useState('')
+    const [ fileDescription, setfileDescription ] = useState('')
     const [ fileToUpload, setFileToUpload ] = useState(null)
     const [ buffer, setBufferToUpload ] = useState(null)
     const [tags, setTags] = useState([]);
 
-    const changeFileType = (type) =>{
-        const newType = fileType === type ? '' : type
-        setFileType(newType)
+    const changefileDescription = (e) =>{
+        const description = e.target.value
+        if(description && description.length < 150){
+            setfileDescription(description)
+        }
+    }
+
+    const changefileName = (e) =>{
+        const name = e.target.value
+        if(name && name.length < 50){
+            setfileName(name)
+        }
     }
 
     const handleFileSelect = (event)=>{
         const [ file ] = event.target && event.target.files
+        var acceptedFilesRegEx = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png|\.avi|\.wmv|\.flv|\.mpg|\.mpeg|\.mp4|\.wav|\.mp3)$/i;
+        if (!acceptedFilesRegEx.exec(file.name)) {
+            setBufferToUpload(null);
+            return
+        }
         if(file){
             setFileToUpload(file)
             const reader = new window.FileReader()
@@ -41,22 +55,22 @@ export const UploadModal = ({ showModal, toggleUploadModal, uploadFileToIPFS }) 
         setTags([...tags.filter(tag => tags.indexOf(tag) !== index)]);
     };
 
-    const handleFileUpload = async (e)=>{
+    const handleFileUpload = (e)=>{
         e.preventDefault()
         const fileData = {
             fileName,
-            fileType,
+            fileDescription,
             fileToUpload,
             buffer,
             tags
         }
         toggleUploadModal()
         setfileName('')
-        setFileType('')
+        setfileDescription('')
         setFileToUpload(null)
         setBufferToUpload(null)
         setTags([])
-        await uploadFileToIPFS(fileData)
+        uploadFileToIPFS(fileData)
     }
 
 
@@ -71,7 +85,10 @@ export const UploadModal = ({ showModal, toggleUploadModal, uploadFileToIPFS }) 
                     <Form.Group>
                         {/* File Name Input */}
                         <Form.Label className="input_label">File Name:</Form.Label>
-                        <Form.Control onChange={e =>{ setfileName(e.target.value.trim())}}  type="text" placeholder="File Name" />
+                        <Form.Control onChange={changefileName}  type="text" placeholder="File Name" />
+                        {/* File Description*/}
+                        <Form.Label className="input_label">File Description:</Form.Label>
+                        <textarea  onChange={changefileDescription} value={fileDescription}  type="text" placeholder="File Description" />
                         {/* Tags Input */}
                         <Form.Label className="input_label">Add Tags:</Form.Label>
                         <div className="tags-input">
@@ -100,15 +117,10 @@ export const UploadModal = ({ showModal, toggleUploadModal, uploadFileToIPFS }) 
                             </Alert>   
                             : ''
                         } 
-                        {/* File Type Input */}
-                        <Form.Label className="input_label">File Type:</Form.Label>
-                        <Form.Check inline label="Video" onChange={e =>{ changeFileType('video')}} disabled={fileType && fileType !=='video'} type="checkbox" id='check_input_video' />
-                        <Form.Check inline label="Audio" onChange={e =>{ changeFileType('audio')}} disabled={fileType && fileType !=='audio'}type="checkbox" id='check_input_audio' />
-                        <Form.Check inline label="Image" onChange={e =>{ changeFileType('image')}} disabled={fileType && fileType !=='image'}type="checkbox" id='check_input_image' />
                         {/* File Browser Input */}
                         <Form.Label className="input_label">File To Upload:</Form.Label>
                         <label className="file_input">
-                            <Form.File onChange={handleFileSelect} style={{display: 'none'}} label="" />
+                            <Form.File accept="audio/*,video/*,image/*" onChange={handleFileSelect} style={{display: 'none'}} label=""/>
                             <div role="button" className="select_file"> SELECT FILE </div>
                             { fileToUpload && fileToUpload.name && !buffer ?
                             <Spinner animation="border" role="status">

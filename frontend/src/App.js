@@ -68,8 +68,8 @@ function App() {
                 <Card style={{ width: '18rem' }} key={idx}>
                   <Card.Img variant="top" src={`https://ipfs.infura.io/ipfs/${file.ipfsHash}`}/>
                   <ul style={{padding: 10}}>
-                      <li><b>File Name: </b> {file.fileName} </li>
-                      <li><b>File Type: </b> {file.fileType} </li>
+                      <li><b>Name: </b> {file.fileName} </li>
+                      <li><b>Description: </b> {file.fileDescription} </li>
                       <ul className="tag_list">
                         {file.tags.map((tag, index) => (
                           <li className="tag">
