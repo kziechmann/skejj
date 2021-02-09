@@ -62,14 +62,14 @@ function App() {
         <div className={showModal? 'modal_overlay' : ''}></div>
         <EthAccountBar userAccount={userAccount}></EthAccountBar>
         <Jumbotron fluid>
-          <Container>
+          <Container style={{display: 'flex', justifyContent: 'space-evenly'}}>
             {files && files.length? 
               files.map((file, idx) =>(
                 <Card style={{ width: '18rem' }} key={idx}>
                   <Card.Img variant="top" src={`https://ipfs.infura.io/ipfs/${file.ipfsHash}`}/>
-                  <div>
-                      <h5>{file.fileName}</h5>
-                      <b>{file.fileType}</b>
+                  <ul style={{padding: 10}}>
+                      <li><b>File Name: </b> {file.fileName} </li>
+                      <li><b>File Type: </b> {file.fileType} </li>
                       <ul className="tag_list">
                         {file.tags.map((tag, index) => (
                           <li className="tag">
@@ -79,8 +79,8 @@ function App() {
                           </li>
                         ))}
                       </ul>
-                      <span style={{fontSize: 'x-small'}}>{`IPFS CID:${file.ipfsHash}`}</span>
-                  </div>
+                      <li style={{fontSize: 'x-small'}}><b>IPFS CID: </b> {file.ipfsHash}</li>
+                  </ul>
                 </Card>
               )) :
                 <div>
