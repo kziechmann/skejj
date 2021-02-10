@@ -41,7 +41,8 @@ export const NavigationBar = function ({ searchIPFS, toggleUploadModal }){
                 <li><button >Images</button></li>
                 <li><button >Video</button></li>
                 <li><button >Music</button></li>
-                <li><button onClick={toggleUploadModal}>UPLOAD</button></li>
+                <li><button >All Media</button></li>
+                <li ><button className="upload_button" onClick={toggleUploadModal}>UPLOAD</button></li>
             </ul>
         </nav>
   )

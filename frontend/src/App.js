@@ -5,6 +5,7 @@ import { Jumbotron, Container, Card, Badge } from 'react-bootstrap'
 import { UploadModal } from './components/UploadModal'
 import { NavigationBar } from './components/NavigationBar'
 import { EthAccountBar } from './components/EthAccountBar'
+import { MediaCard } from './components/MediaCard'
 import {loadWeb3, getAccount, getFileTransferContract, getInbox } from './web3-helpers.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -41,14 +42,15 @@ function App() {
 
   const uploadFileToIPFS = async (fileData) => {
     const { buffer } = fileData
-    console.log('Uploading file to IPFS....', 'file name:', fileData.fileName, buffer)
-    const result = await ipfs.add(buffer)
-    if(!result){
-      console.error('Error uploading to IPFS')
-    } else {
-      console.log(result)
+    console.log('Uploading file to IPFS....', 'file name:', fileData.fileName)
+    // add ui elements to show this is happening behind the scenes
+    setFiles([...files, fileData])
+    try{
+      const result = await ipfs.add(buffer)
       fileData.ipfsHash = result.path
       setFiles([...files, fileData])
+    } catch (err){
+      console.error('Error uploading to IPFS', err)
     }
   }
 
@@ -62,44 +64,15 @@ function App() {
         <div className={showModal? 'modal_overlay' : ''}></div>
         <EthAccountBar userAccount={userAccount}></EthAccountBar>
         <Jumbotron fluid>
+          <h1>Media</h1>
           <Container style={{display: 'flex', justifyContent: 'space-evenly'}}>
             {files && files.length? 
               files.map((file, idx) =>(
-                <Card style={{ width: '18rem' }} key={idx}>
-                  <Card.Img variant="top" src={`https://ipfs.infura.io/ipfs/${file.ipfsHash}`}/>
-                  <ul style={{padding: 10}}>
-                      <li><b>Name: </b> {file.fileName} </li>
-                      <li><b>Description: </b> {file.fileDescription} </li>
-                      <ul className="tag_list">
-                        {file.tags.map((tag, index) => (
-                          <li className="tag">
-                          <Badge key={index} variant="secondary"> 
-                              {tag}
-                          </Badge>
-                          </li>
-                        ))}
-                      </ul>
-                      <li style={{fontSize: 'x-small'}}><b>IPFS CID: </b> {file.ipfsHash}</li>
-                  </ul>
-                </Card>
-              )) :
-                <div>
-                <h1>Photos</h1>
-                              <p>
-                  This is a modified jumbotron that occupies the entire horizontal space of
-                  its parent.
-                </p>
-                </div>
-            }
-          </Container>
-        </Jumbotron>
-        <Jumbotron fluid>
-          <Container>
-            <h1>Photos</h1>
-            <p>
-              This is a modified jumbotron that occupies the entire horizontal space of
-              its parent.
-            </p>
+                <MediaCard file={file} idx={idx}></MediaCard>
+              )):
+              <p>
+                Currently no media to display from IPFS, please feel free to upload some of your own!.
+              </p>}
           </Container>
         </Jumbotron>
         </main>

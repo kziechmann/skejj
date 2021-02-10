@@ -126,6 +126,16 @@
     display: none;
   }
 
+  .selected{
+    border: #5a76fd 1.5px solid;
+  }
+
+  .upload_button{
+    margin-left: 1rem;
+    background-color: #5a76fd;
+    color: white;
+  }
+
   @media (max-width: 800px) {
     nav {
       justify-content: space-between;
@@ -203,4 +213,6 @@
     .main {
       background-size: 500px;
     }
+
+
   }

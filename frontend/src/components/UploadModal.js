@@ -4,8 +4,9 @@ import { useState } from 'react'
 import './UploadModal.css'
 
 export const UploadModal = ({ showModal, toggleUploadModal, uploadFileToIPFS }) =>{
-    const [ fileName, setfileName ] = useState('')
-    const [ fileDescription, setfileDescription ] = useState('')
+    const [ fileName, setFileName ] = useState('')
+    const [ fileType, setFileType ] = useState('')
+    const [ fileDescription, setFileDescription ] = useState('')
     const [ fileToUpload, setFileToUpload ] = useState(null)
     const [ buffer, setBufferToUpload ] = useState(null)
     const [tags, setTags] = useState([]);
@@ -13,26 +14,34 @@ export const UploadModal = ({ showModal, toggleUploadModal, uploadFileToIPFS }) 
     const changefileDescription = (e) =>{
         const description = e.target.value
         if(description && description.length < 150){
-            setfileDescription(description)
+            setFileDescription(description)
         }
     }
 
     const changefileName = (e) =>{
         const name = e.target.value
-        if(name && name.length < 50){
-            setfileName(name)
+        if(name.length < 50){
+            setFileName(name)
         }
     }
 
-    const handleFileSelect = (event)=>{
-        const [ file ] = event.target && event.target.files
-        var acceptedFilesRegEx = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png|\.avi|\.wmv|\.flv|\.mpg|\.mpeg|\.mp4|\.wav|\.mp3)$/i;
-        if (!acceptedFilesRegEx.exec(file.name)) {
-            setBufferToUpload(null);
-            return
+    const getFileType = name =>{
+        if(name.match(/(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i)){
+            return 'image'
+        } else if(name.match(/(\.avi|\.wmv|\.flv|\.mpg|\.mpeg|\.mp4)$/i)){
+            return 'video';
+        } else if(name.match(/(\.wav|\.mp3)$/i)){
+            return 'audio'
         }
-        if(file){
+        return ''
+    }
+
+    const handleFileSelect = (event)=>{
+        const [ file ] = event.target && event.target.files || []
+        const typeOfFile = getFileType(file && file.name)
+        if(file && typeOfFile){
             setFileToUpload(file)
+            setFileType(typeOfFile)
             const reader = new window.FileReader()
             reader.readAsArrayBuffer(file)
             reader.onloadend = () => {
@@ -45,8 +54,11 @@ export const UploadModal = ({ showModal, toggleUploadModal, uploadFileToIPFS }) 
     }
 
     const addTags = event => {
-        if (event.key === "Enter" && event.target.value !== "") {
-            setTags([...tags, event.target.value]);
+        const tag = event.target.value.trim()
+        if (event.key === "Enter" && tag !== "" && !tags.includes(tag)) {
+            setTags([...tags, tag]);
+            event.target.value = "";
+        } else if (tags.includes(tag)){
             event.target.value = "";
         }
     };
@@ -59,14 +71,16 @@ export const UploadModal = ({ showModal, toggleUploadModal, uploadFileToIPFS }) 
         e.preventDefault()
         const fileData = {
             fileName,
+            fileType,
             fileDescription,
             fileToUpload,
             buffer,
             tags
         }
         toggleUploadModal()
-        setfileName('')
-        setfileDescription('')
+        setFileName('')
+        setFileType('')
+        setFileDescription('')
         setFileToUpload(null)
         setBufferToUpload(null)
         setTags([])
