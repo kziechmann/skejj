@@ -218,24 +218,32 @@ video {
 }
 
 .jumbotron {
+  display: grid;
+  grid-template-areas: "a a";
   background-image: linear-gradient(
     180deg
     , white 0%, #edf0ff 25%, #edf0ff 75%, white 100%);
 }
 
-.gallery{
-  grid-gap: 1rem;
-  display: grid;
-  grid-template-areas: "a b c";
-}
-
-@media (max-width: 1000px) {
-  .gallery{
-    grid-template-areas: "a b";
+@media (max-width: 750px) {
+  .jumbotron {
+    grid-template-areas: "a";
   }
 }
 
-@media (max-width: 720px) {
+.media_window{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gallery{
+  grid-gap: 1rem;
+  display: grid;
+  grid-template-areas: "a b";
+}
+
+
+@media (max-width: 1000px) {
   .gallery{
     grid-template-areas: "a";
   }

@@ -16,7 +16,8 @@ const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' 
 function App() {
   const [ userAccount, setAccount ] = useState('')
   const [ fileTransferContract, setContract ] = useState(null)
-  const [ files, setFiles ] = useState([])
+  const [ yourFiles, setYourFiles ] = useState([])
+  const [ skejjFiles, setSkejjFiles ] = useState([])
   const [ searchTerm, setSearchTerm ] = useState('')
   const [ inbox, setInbox ] = useState({})
   const [ showModal, setShowModal ] = useState(true)
@@ -44,15 +45,15 @@ function App() {
     const { buffer } = fileData
     console.log('Uploading file to IPFS....', 'file name:', fileData.fileName)
     // add ui elements to show this is happening behind the scenes
-    setFiles([...files, fileData])
+    setYourFiles([...yourFiles, fileData])
     try{
       const result = await ipfs.add(buffer)
       fileData.ipfsHash = result.path
-      setFiles([...files, fileData])
+      setYourFiles([...yourFiles, fileData])
     } catch (err){
       console.error('Error uploading to IPFS', err)
       fileData.ipfsHash = 'error'
-      setFiles([...files, fileData])
+      setYourFiles([...yourFiles, fileData])
     }
   }
 
@@ -66,10 +67,22 @@ function App() {
         <div className={showModal? 'modal_overlay' : ''}></div>
         <EthAccountBar userAccount={userAccount}></EthAccountBar>
         <Jumbotron fluid>
-          <h1>Media</h1>
-          <Container className="gallery">
-            {files && files.length? 
-              files.map((file, idx) =>(
+          <Container className="media_window">
+            <h1>LISTED CONTENT ON SKEJJ</h1>
+            <div className="gallery">
+            {yourFiles && yourFiles.length? 
+              yourFiles.map((file, idx) =>(
+                <MediaCard file={file} idx={idx}></MediaCard>
+              )):
+              <p>
+                Currently no media to display from IPFS, please feel free to upload some of your own!.
+              </p>}
+            </div>
+          </Container>
+          <Container className="media_window">
+          <h1>YOUR IPFS MEDIA</h1>
+            {yourFiles && yourFiles.length? 
+              yourFiles.map((file, idx) =>(
                 <MediaCard file={file} idx={idx}></MediaCard>
               )):
               <p>
