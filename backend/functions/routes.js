@@ -48,10 +48,10 @@ module.exports = function (app, dbe){
     })
 
     app.post('/addProject',verify, (req, res)=>{
-        const {name, pictures, description, reason, goal, tier1, tier2, tier3, time } = req.body
+        const {name, pictures, description, reason, tier1, tier2, tier3, time, preview } = req.body
         if(name && pictures && description && reason && goal){
             const id = shortId.generate()
-            db.insertOne({name, user: req.user, id, pictures, time, description, reason, tier1, tier2, tier3, goal, current:0}, (err,doc)=>{
+            db.insertOne({name, user: req.user, id, pictures, time, description,preview, reason, tier1, tier2, tier3, goal, current:0}, (err,doc)=>{
                 res.json({message:"Project created successfully",name, id })
             })
         }else{
