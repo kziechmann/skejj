@@ -51,9 +51,8 @@ module.exports = function (app, dbe){
         const {name, pictures, description, reason, goal, tier1, tier2, tier3, time } = req.body
         if(name && pictures && description && reason && goal){
             const id = shortId.generate()
-            const address = null //generate address
             db.insertOne({name, user: req.user, id, pictures, time, description, reason, tier1, tier2, tier3, goal, current:0}, (err,doc)=>{
-                res.json({message:"Project created successfully",name, id, address })
+                res.json({message:"Project created successfully",name, id })
             })
         }else{
             res.status(400).json({error:true, message:"One or more required fields not provided"})
