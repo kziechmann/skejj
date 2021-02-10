@@ -26,6 +26,7 @@ export const UploadModal = ({ showModal, toggleUploadModal, uploadFileToIPFS }) 
     }
 
     const getFileType = name =>{
+        if(!name) return ''
         if(name.match(/(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i)){
             return 'image'
         } else if(name.match(/(\.avi|\.wmv|\.flv|\.mpg|\.mpeg|\.mp4)$/i)){

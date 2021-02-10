@@ -21,7 +21,22 @@ export const MediaCard = ({ file, idx }) =>{
         </div>
         : '')
 
-    const cardContent = file.ipfsHash? media : <div><h4>Uploading {file.fileName} to IPFS!</h4><Spinner animation="border" role="status"></Spinner></div>
+     
+    const loading = (<div>
+            <img height="250" width="250" src="https://ipfs.infura.io/ipfs/QmXCr2VdA11tDTfULQH8i6xsGrHsYH5KqNgaXHMTsFhu2v"></img>
+            <h4>Uploading {file.fileName} to IPFS!</h4>
+            <Spinner animation="border" role="status"></Spinner>
+        </div>)
+
+    const error = (
+        (<div className="upload_error">
+            <img height="250" width="250" src="https://ipfs.infura.io/ipfs/QmXCr2VdA11tDTfULQH8i6xsGrHsYH5KqNgaXHMTsFhu2v"></img>
+            <h4>Error uploading to IPFS!</h4>
+        </div>)
+    )
+
+    const cardContent = !file.ipfsHash? loading : file.ipfsHash === 'error'? error : media
+        
 
     return <Card style={{ width: '18rem' }} key={idx}>
         

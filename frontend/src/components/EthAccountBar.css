@@ -10,7 +10,9 @@
 }
 
 .eth_account{
-    background: white;
+    background-image: linear-gradient(
+    315deg
+    , #5976fd 0%, #d3dbff 74%);
     padding: .5rem;
     display: flex;
     justify-content: flex-end;

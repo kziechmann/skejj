@@ -6,3 +6,14 @@ audio {
 .audio_card img{
     margin: 15px;
 }
+
+.upload_error{
+    background: rgba(230, 60, 60, 0.82);
+    overflow: hidden;
+    height: 100%;
+    z-index: 1;
+}
+
+.card{
+    justify-self: center;
+}

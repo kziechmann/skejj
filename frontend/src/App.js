@@ -51,6 +51,8 @@ function App() {
       setFiles([...files, fileData])
     } catch (err){
       console.error('Error uploading to IPFS', err)
+      fileData.ipfsHash = 'error'
+      setFiles([...files, fileData])
     }
   }
 
@@ -65,7 +67,7 @@ function App() {
         <EthAccountBar userAccount={userAccount}></EthAccountBar>
         <Jumbotron fluid>
           <h1>Media</h1>
-          <Container style={{display: 'flex', justifyContent: 'space-evenly'}}>
+          <Container className="gallery">
             {files && files.length? 
               files.map((file, idx) =>(
                 <MediaCard file={file} idx={idx}></MediaCard>

@@ -216,3 +216,27 @@ video {
   display: block;
   cursor: pointer;
 }
+
+.jumbotron {
+  background-image: linear-gradient(
+    180deg
+    , white 0%, #edf0ff 25%, #edf0ff 75%, white 100%);
+}
+
+.gallery{
+  grid-gap: 1rem;
+  display: grid;
+  grid-template-areas: "a b c";
+}
+
+@media (max-width: 1000px) {
+  .gallery{
+    grid-template-areas: "a b";
+  }
+}
+
+@media (max-width: 720px) {
+  .gallery{
+    grid-template-areas: "a";
+  }
+}
