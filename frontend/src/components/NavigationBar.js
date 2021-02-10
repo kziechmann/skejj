@@ -3,7 +3,7 @@ import { InputGroup, FormControl} from 'react-bootstrap'
 import { useState } from 'react'
 import './NavigationBar.css'
 
-export const NavigationBar = function ({ searchIPFS, toggleUploadModal }){
+export const NavigationBar = function ({ searchIPFS, toggleUploadModal, searchTerm }){
     const [ searchText, setSearchText ] = useState('')
 
     const handleSubmit = e => {
@@ -21,13 +21,12 @@ export const NavigationBar = function ({ searchIPFS, toggleUploadModal }){
             <input className="menu-btn" type="checkbox" id="menu-btn"/>
             <InputGroup className="search_box" inline>
                 <FormControl 
-                    onChange={e => setSearchText(e.target.value)} 
+                    onChange={e => {setSearchText(e.target.value); console.log(e.target.value)}} 
                     value={searchText} type="text"
                     className="search_input" 
                     placeholder="Search IPFS..." />
-                <InputGroup.Append >
+                <InputGroup.Append onClick={handleSubmit} >
                    <button
-                    onClick={handleSubmit} 
                     className="search_btn" 
                     variant="outline-primary">
                         SEARCH
@@ -38,10 +37,33 @@ export const NavigationBar = function ({ searchIPFS, toggleUploadModal }){
                 <span className="nav-icon"></span>
             </label>
             <ul className="menu">
-                <li><button >Images</button></li>
-                <li><button >Video</button></li>
-                <li><button >Music</button></li>
-                <li><button >All Media</button></li>
+                <li >
+                    <button 
+                        onClick={() => {searchIPFS('image')}} 
+                        className={searchTerm ==='image'? 'search_filter' :''}>
+                            Images
+                    </button>
+                </li>
+                <li>
+                    <button 
+                        className={searchTerm ==='video'? 'search_filter' :''} 
+                        onClick={() => {searchIPFS('video')}}>
+                        Video
+                    </button>
+                </li>
+                <li>
+                    <button onClick={() => {searchIPFS('music')}}
+                     className={searchTerm ==='music'? 'search_filter' :''}>
+                        Music
+                    </button>
+                </li>
+                <li >
+                    <button 
+                        onClick={() => {searchIPFS('')}} 
+                        className={searchTerm ==='' ? 'search_filter' :''}>
+                            All media
+                    </button>
+                </li>
                 <li ><button className="upload_button" onClick={toggleUploadModal}>UPLOAD</button></li>
             </ul>
         </nav>

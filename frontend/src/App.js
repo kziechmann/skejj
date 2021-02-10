@@ -1,7 +1,7 @@
 
 import ipfsClient from 'ipfs-http-client'
 import { useEffect, useState } from 'react'
-import { Jumbotron, Container, Card, Badge } from 'react-bootstrap'
+import { Jumbotron, Container } from 'react-bootstrap'
 import { UploadModal } from './components/UploadModal'
 import { NavigationBar } from './components/NavigationBar'
 import { EthAccountBar } from './components/EthAccountBar'
@@ -57,10 +57,12 @@ function App() {
     }
   }
 
+  const filteredFiles = yourFiles.filter(file => JSON.stringify(file).includes(searchTerm))
+
   return (
     <div className="App">
       <header className="App-header">
-          <NavigationBar searchIPFS={searchIPFS} toggleUploadModal={toggleUploadModal}></NavigationBar>
+          <NavigationBar searchIPFS={searchIPFS} searchTerm={searchTerm} toggleUploadModal={toggleUploadModal}></NavigationBar>
       </header>
       <UploadModal uploadFileToIPFS={uploadFileToIPFS} showModal={showModal} toggleUploadModal={toggleUploadModal}></UploadModal>
       <main >
@@ -68,10 +70,10 @@ function App() {
         <EthAccountBar userAccount={userAccount}></EthAccountBar>
         <Jumbotron fluid>
           <Container className="media_window">
-            <h1>LISTED CONTENT ON SKEJJ</h1>
+            <h2>LISTED CONTENT ON SKEJJ</h2>
             <div className="gallery">
-            {yourFiles && yourFiles.length? 
-              yourFiles.map((file, idx) =>(
+            {filteredFiles && filteredFiles.length? 
+              filteredFiles.map((file, idx) =>(
                 <MediaCard file={file} idx={idx}></MediaCard>
               )):
               <p>
@@ -80,7 +82,7 @@ function App() {
             </div>
           </Container>
           <Container className="media_window">
-          <h1>YOUR IPFS MEDIA</h1>
+          <h2>YOUR IPFS MEDIA</h2>
             {yourFiles && yourFiles.length? 
               yourFiles.map((file, idx) =>(
                 <MediaCard file={file} idx={idx}></MediaCard>

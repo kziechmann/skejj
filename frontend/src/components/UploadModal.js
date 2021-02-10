@@ -56,7 +56,7 @@ export const UploadModal = ({ showModal, toggleUploadModal, uploadFileToIPFS }) 
 
     const addTags = event => {
         const tag = event.target.value.trim()
-        if (event.key === "Enter" && tag !== "" && !tags.includes(tag)) {
+        if ((event.key === "Enter" ||event.key === "Space") && tag !== "" && !tags.includes(tag)) {
             setTags([...tags, tag]);
             event.target.value = "";
         } else if (tags.includes(tag)){
