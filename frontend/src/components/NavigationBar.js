@@ -21,7 +21,7 @@ export const NavigationBar = function ({ searchIPFS, toggleUploadModal, searchTe
             <input className="menu-btn" type="checkbox" id="menu-btn"/>
             <InputGroup className="search_box" inline>
                 <FormControl 
-                    onChange={e => {setSearchText(e.target.value); console.log(e.target.value)}} 
+                    onChange={e => {setSearchText(e.target.value)}} 
                     value={searchText} type="text"
                     className="search_input" 
                     placeholder="Search IPFS..." />

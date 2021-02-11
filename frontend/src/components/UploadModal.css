@@ -59,7 +59,7 @@
     transition: all ease 0.2s;
 }
 
-.modal-body input[type=text], .modal-body .file_input, textarea {
+.modal-body input[type=text], .modal-body .file_input, textarea{
     border: #5a76fd 1.5px solid;
     color: #5a76fd;
     height: 100%;
