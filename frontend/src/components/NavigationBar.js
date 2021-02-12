@@ -52,9 +52,9 @@ export const NavigationBar = function ({ searchIPFS, toggleUploadModal, searchTe
                     </button>
                 </li>
                 <li>
-                    <button onClick={() => {searchIPFS('music')}}
-                     className={searchTerm ==='music'? 'search_filter' :''}>
-                        Music
+                    <button onClick={() => {searchIPFS('audio')}}
+                     className={searchTerm ==='audio'? 'search_filter' :''}>
+                        Audio
                     </button>
                 </li>
                 <li >

@@ -32,7 +32,7 @@ export const getFileTransferContract = async () => {
       const fileTransferContract = new web3.eth.Contract(FileTransferContract.abi, networkData.address)
       return fileTransferContract
     } else {
-      alert('contract not found on this network')
+      // alert('contract not found on this network')
       return null
     }
 }

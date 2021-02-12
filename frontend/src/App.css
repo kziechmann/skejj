@@ -21,7 +21,7 @@ a {
 button {
   border:#5a76fd 1.5px solid;
   color: white;
-  height: 100%;
+  /* height: 100%; */
   padding: .275rem;
   background-color: #5a76fd;
   border-radius: .125rem;
@@ -212,18 +212,25 @@ footer p {
 
 video {
   width: 100%;
-  height: 100%;
   display: block;
   cursor: pointer;
 }
 
 .jumbotron {
   display: grid;
-  grid-template-areas: "a a";
+  grid-gap: 1rem;
+  grid-template-areas: "a a b";
   background-image: linear-gradient(
     180deg
     , white 0%, #edf0ff 25%, #edf0ff 75%, white 100%);
 }
+
+@media (max-width: 1000px) {
+  .jumbotron {
+    grid-template-areas: "a b";
+  }
+}
+
 
 @media (max-width: 750px) {
   .jumbotron {
