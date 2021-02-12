@@ -66,7 +66,7 @@ function App() {
 
   const filteredFiles = skejjFiles.filter(
     file => Object.values(file).some(value => {
-      return typeof value == 'object'? Object.values(value).join(" ").includes(searchTerm) : value.includes(searchTerm)
+      return typeof value == 'object'? Object.values(value).join(" ").toLowerCase().includes(searchTerm.toLowerCase()) : value.toLowerCase().includes(searchTerm.toLowerCase())
     }))
 
   return (
