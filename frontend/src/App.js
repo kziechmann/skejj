@@ -66,7 +66,7 @@ function App() {
 
   const filteredFiles = skejjFiles.filter(
     file => Object.values(file).some(value => {
-      return typeof value == 'object'? Object.keys(value).join(" ").includes(searchTerm) : value.includes(searchTerm)
+      return typeof value == 'object'? Object.values(value).join(" ").includes(searchTerm) : value.includes(searchTerm)
     }))
 
   return (
@@ -87,7 +87,7 @@ function App() {
                 <MediaCard file={file} idx={idx}></MediaCard>
               )):
               <p>
-                {searchTerm? `displaying medai related to ${searchTerm}` 
+                {searchTerm? `displaying media related to '${searchTerm}'` 
                 : 'Currently no media to display from IPFS, please feel free to upload some of your own!.'}
               </p>}
             </div>
