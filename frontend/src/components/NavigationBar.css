@@ -1,8 +1,9 @@
-nav {
+  nav.nav {
     display: flex;
+    flex-wrap: none !important;
     align-items: center;
     justify-content: space-around;
-    padding: 10px 30px;
+    padding: 10px 0px;
     background-color: #fff;
     box-shadow: 2px 2px 20px rgba(90, 118, 253, 0.13);
     z-index: 1;
@@ -21,10 +22,13 @@ nav {
     margin-right: 1rem;
   }
   
-  nav ul li a, .search-btn {
+  nav ul li button {
+    background: none;
+    margin: 0px;
+    border: none;
     height: 40px;
     line-height: 43px;
-    padding: 0px 22px;
+    padding: 0px 15px;
     display: flex;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -33,12 +37,19 @@ nav {
     letter-spacing: 1px;
   }
   
-  nav ul li a:hover {
+  nav ul li button:hover {
     background-color: #5a76fd;
     color: #fff;
     box-shadow: 5px 10px 30px rgba(90, 118, 253, 0.5);
     transition: all ease 0.2s;
   }
+
+/* Search Box */
+
+.search_btn:hover {
+  box-shadow: 5px 10px 30px rgba(90, 118, 253, 0.5);
+  transition: all ease 0.2s;
+}
 
   .search_wrap {
     width: 500px;
@@ -51,7 +62,16 @@ nav {
     min-width: 50px;
     height: 60px;
   }
-  
+
+  .search_box.input-group{
+    width: unset;
+  }
+
+  @media (max-width: 500px) {
+    .search_box .search_input  {
+      width: 20vw !important;
+    }
+  }
   .search_wrap .search_box .input {
     position: absolute;
     top: 0;
@@ -93,13 +113,23 @@ nav {
     border-bottom-right-radius: 3px;
   }
   
-  .search_wrap.search_wrap_1 .search_box .input,
-  .search_box .input {
-    padding-right: 80px;
-  }
-  
   nav .menu-btn {
     display: none;
+  }
+
+  .selected{
+    border: #5a76fd 1.5px solid;
+  }
+
+  .upload_button{
+    margin-left: 1rem;
+    background-color: #5a76fd;
+    color: white;
+  }
+  
+  .search_filter {
+    border: #5a76fd 1.5px solid;
+    color: #5a76fd;
   }
 
   @media (max-width: 800px) {
@@ -119,7 +149,7 @@ nav {
     .menu li {
       width: 100%;
     }
-    nav .menu li a {
+    nav .menu li button {
       width: 100%;
       height: 40px;
       justify-content: center;
@@ -179,4 +209,6 @@ nav {
     .main {
       background-size: 500px;
     }
+
+
   }

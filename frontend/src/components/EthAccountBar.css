@@ -1,6 +1,19 @@
+.account_details{
+  color: #5273dd;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.account_details .identicon{
+  margin: 0rem .25rem;
+}
+
 .eth_account{
-    color:#5273dd;
-    background: white;
+    cursor: pointer;
+    background-image: linear-gradient(
+    315deg
+    , #5976fd 0%, #d3dbff 74%);
     padding: .5rem;
     display: flex;
     justify-content: flex-end;
@@ -9,4 +22,21 @@
 .alert{
     padding: .25rem 1rem !important;
     margin-bottom: 0 !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+@media (max-width: 550px) {
+  .account_label{
+    display: none;
+  }
+}
+@media (max-width: 430px) {
+  .alert{
+    width: 100%;
+  }
+  .hide-mobile{
+    display: none;
+  }
+}
+

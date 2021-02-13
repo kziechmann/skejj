@@ -1,0 +1,33 @@
+audio {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.audio_card img{
+    margin: 15px;
+}
+
+.upload_error{
+    background: rgba(230, 60, 60, 0.82);
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.card{
+    justify-self: center;
+}
+
+.ipfs_cid{
+    font-size: x-small;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    justify-self: center;
+    cursor: pointer;
+    background: linear-gradient( 
+        315deg
+         , #5976fd 0%, #d3dbff 74%);
+    padding: 5px;
+    border-radius: 15px
+}
